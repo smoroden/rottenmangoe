@@ -14,6 +14,9 @@
 		582A0FCC1CF3872600BE7493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 582A0FCB1CF3872600BE7493 /* Assets.xcassets */; };
 		582A0FCF1CF3872600BE7493 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 582A0FCD1CF3872600BE7493 /* LaunchScreen.storyboard */; };
 		582A0FD81CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FD71CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m */; };
+		582A0FDB1CF3879500BE7493 /* MovieCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FDA1CF3879500BE7493 /* MovieCollectionViewCell.m */; };
+		582A0FDE1CF38B9C00BE7493 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FDD1CF38B9C00BE7493 /* Movie.m */; };
+		582A0FE11CF3A3C600BE7493 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FE01CF3A3C600BE7493 /* MovieDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,12 @@
 		582A0FD01CF3872600BE7493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		582A0FD61CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesInTheatreCollectionViewController.h; sourceTree = "<group>"; };
 		582A0FD71CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviesInTheatreCollectionViewController.m; sourceTree = "<group>"; };
+		582A0FD91CF3879500BE7493 /* MovieCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCollectionViewCell.h; sourceTree = "<group>"; };
+		582A0FDA1CF3879500BE7493 /* MovieCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionViewCell.m; sourceTree = "<group>"; };
+		582A0FDC1CF38B9C00BE7493 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		582A0FDD1CF38B9C00BE7493 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		582A0FDF1CF3A3C600BE7493 /* MovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
+		582A0FE01CF3A3C600BE7493 /* MovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +72,14 @@
 				582A0FBF1CF3872600BE7493 /* AppDelegate.h */,
 				582A0FC01CF3872600BE7493 /* AppDelegate.m */,
 				582A0FC51CF3872600BE7493 /* Main.storyboard */,
+				582A0FDF1CF3A3C600BE7493 /* MovieDetailViewController.h */,
+				582A0FE01CF3A3C600BE7493 /* MovieDetailViewController.m */,
+				582A0FD91CF3879500BE7493 /* MovieCollectionViewCell.h */,
+				582A0FDA1CF3879500BE7493 /* MovieCollectionViewCell.m */,
 				582A0FD61CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.h */,
 				582A0FD71CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m */,
+				582A0FDC1CF38B9C00BE7493 /* Movie.h */,
+				582A0FDD1CF38B9C00BE7493 /* Movie.m */,
 				582A0FCB1CF3872600BE7493 /* Assets.xcassets */,
 				582A0FCD1CF3872600BE7493 /* LaunchScreen.storyboard */,
 				582A0FD01CF3872600BE7493 /* Info.plist */,
@@ -152,7 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				582A0FDE1CF38B9C00BE7493 /* Movie.m in Sources */,
+				582A0FE11CF3A3C600BE7493 /* MovieDetailViewController.m in Sources */,
 				582A0FCA1CF3872600BE7493 /* Rotten_Mangoes.xcdatamodeld in Sources */,
+				582A0FDB1CF3879500BE7493 /* MovieCollectionViewCell.m in Sources */,
 				582A0FC11CF3872600BE7493 /* AppDelegate.m in Sources */,
 				582A0FD81CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m in Sources */,
 				582A0FBE1CF3872600BE7493 /* main.m in Sources */,

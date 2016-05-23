@@ -1,5 +1,5 @@
 //
-//  MoviesInTheatreCollectionViewController.h
+//  MovieDetailViewController.h
 //  Rotten Mangoes
 //
 //  Created by Zach Smoroden on 2016-05-23.
@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Movie.h"
 
-@interface MoviesInTheatreCollectionViewController : UICollectionViewController
+@class Movie;
+
+@interface MovieDetailViewController : UIViewController
 
 @property (nonatomic) Movie *movie;
+
+-(void)setupView;
 
 @end
