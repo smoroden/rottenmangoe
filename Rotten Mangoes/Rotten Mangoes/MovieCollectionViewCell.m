@@ -10,4 +10,9 @@
 
 @implementation MovieCollectionViewCell
 
+-(void)prepareForReuse {
+    [self.task cancel];
+    self.task = nil;
+}
+
 @end
