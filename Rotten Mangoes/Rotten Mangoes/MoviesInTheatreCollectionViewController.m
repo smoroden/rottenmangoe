@@ -49,6 +49,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)refreshMovies {
     
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    activityView.frame = self.view.frame;
+    [self.view addSubview:activityView];
+    [activityView startAnimating];
+    
+    
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url;
     if (!self.nextUrl && self.hasMore) {
@@ -75,13 +82,14 @@ static NSString * const reuseIdentifier = @"Cell";
         
         NSDictionary *links = [theData valueForKey:@"links"];
         
-        self.nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[links valueForKey:@"next"]]];
+        self.nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[links valueForKey:@"next"], self.apikey]];
         self.hasMore = self.nextUrl ? YES : NO;
         
-        
-        self.isRefreshing = NO;
+                self.isRefreshing = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            [activityView stopAnimating];
+            [activityView removeFromSuperview];
+
             [self.collectionView reloadData];
             
         });
