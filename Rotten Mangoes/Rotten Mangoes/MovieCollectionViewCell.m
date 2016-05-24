@@ -11,8 +11,9 @@
 @implementation MovieCollectionViewCell
 
 -(void)prepareForReuse {
+    [super prepareForReuse];
     [self.task cancel];
-    self.task = nil;
+//    self.task = nil;
 }
 
 @end

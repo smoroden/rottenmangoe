@@ -117,23 +117,23 @@ static NSString * const reuseIdentifier = @"Cell";
     MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCell" forIndexPath:indexPath];
     
     // Configure the cell
+    //[cell.task cancel];
     
     Movie *movie = self.movies[indexPath.row];
     
     cell.titleLabel.text = movie.title;
-    [cell.task cancel];
     
     if(!movie.poster) {
         
         
         cell.task = [[NSURLSession sharedSession] dataTaskWithURL:movie.posterUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
             movie.poster = [UIImage imageWithData:data];
             
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.collectionView reloadData];
+                cell.posterImageView.image = movie.poster;
+                //[self.collectionView reloadData];
                 
             });
         }];
