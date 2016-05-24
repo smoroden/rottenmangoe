@@ -10,8 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "Movie.h"
 #import "Theatre.h"
+#import "TheatreCell.h"
 
-@interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) CLLocationManager *locationManager;
@@ -21,6 +22,8 @@
 @property (nonatomic) NSString *api;
 
 @property (nonatomic) NSMutableArray *theatres;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomOfButtonConstraint;
 
 @end
 
@@ -84,6 +87,19 @@
     self.lastLocation = currentLocation;
 
 }
+- (IBAction)showTheatreList:(UIButton *)sender {
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        if (self.bottomOfButtonConstraint.constant == 0) {
+            self.bottomOfButtonConstraint.constant = self.view.frame.size.height / 2;
+        } else {
+            self.bottomOfButtonConstraint.constant = 0;
+        }
+        
+        [self.view layoutIfNeeded];
+    }];
+    
+}
 
 -(void)findTheatres {
     NSURLSession *session = [NSURLSession sharedSession];
@@ -94,15 +110,34 @@
         
         NSError *jsonError = nil;
         
-        NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-        
-        NSArray *theTheatres = [theData valueForKey:@"theatres"];
-        
-        for (NSDictionary *theatre in theTheatres) {
-            [self.theatres addObject:[[Theatre alloc] initWithDictionary:theatre]];
+        if (data) {
+            NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            NSArray *theTheatres = [theData valueForKey:@"theatres"];
+            
+            // To make sure that we don't have multiples of the same theatre we put the names into a set
+            NSMutableSet *theatreSet = [NSMutableSet set];
+            
+            for (NSDictionary *theatre in theTheatres) {
+                Theatre *new = [[Theatre alloc] initWithDictionary:theatre];
+                
+                // Only if the set doesn't contain the name already do we add the new theatre
+                if(![theatreSet containsObject:new.name]) {
+                    [self.theatres addObject:new];
+                    [theatreSet addObject:new.name];
+                }
+                
+            }
+            
+            NSLog(@"The theatres: %@", theTheatres);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+            
+            [self addAnnotations];
+            
         }
-
-        [self addAnnotations];
+        
         
     }];
     [task resume];
@@ -138,6 +173,34 @@
     
     
     return pin;
+}
+
+#pragma mark UITableView methods
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    TheatreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TheatreCell" forIndexPath:indexPath];
+    
+    Theatre *theatre = self.theatres[indexPath.row];
+    
+    cell.nameLabel.text = theatre.name;
+    cell.addressLabel.text = theatre.address;
+    
+    CGFloat distance = [self.lastLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:theatre.location.latitude longitude:theatre.location.longitude]]/1000;
+    
+    cell.distanceLabel.text = [NSString stringWithFormat:@"%0.1fkm",distance];
+    //theatre.location
+    
+    
+    return cell;
+    
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.theatres.count;
 }
 
 
