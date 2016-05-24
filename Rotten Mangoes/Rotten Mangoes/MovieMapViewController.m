@@ -9,6 +9,7 @@
 #import "MovieMapViewController.h"
 #import <MapKit/MapKit.h>
 #import "Movie.h"
+#import "Theatre.h"
 
 @interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -18,6 +19,8 @@
 @property (nonatomic) NSString *postalCode;
 
 @property (nonatomic) NSString *api;
+
+@property (nonatomic) NSMutableArray *theatres;
 
 @end
 
@@ -35,6 +38,8 @@
     }
     
     self.api = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?";
+    
+    self.theatres = [NSMutableArray array];
 
 }
 
@@ -91,12 +96,50 @@
         
         NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
         
-        NSLog(@"the data: %@", theData);
+        NSArray *theTheatres = [theData valueForKey:@"theatres"];
+        
+        for (NSDictionary *theatre in theTheatres) {
+            [self.theatres addObject:[[Theatre alloc] initWithDictionary:theatre]];
+        }
 
+        [self addAnnotations];
         
     }];
     [task resume];
 }
+
+-(void) addAnnotations {
+    for (Theatre *theatre in self.theatres) {
+        MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
+        newAnnotation.title = theatre.name;
+        newAnnotation.subtitle = theatre.address;
+        newAnnotation.coordinate = theatre.location;
+        
+        [self.mapView addAnnotation:newAnnotation];
+
+    }
+}
+
+- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    
+    MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    
+    if (!pin) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        pin.pinTintColor = [UIColor purpleColor];
+        pin.canShowCallout = YES;
+    }
+    
+    
+    
+    return pin;
+}
+
 
 
 @end

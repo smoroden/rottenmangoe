@@ -19,6 +19,7 @@
 		582A0FE11CF3A3C600BE7493 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FE01CF3A3C600BE7493 /* MovieDetailViewController.m */; };
 		582A0FE41CF4CEF000BE7493 /* MovieMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FE31CF4CEF000BE7493 /* MovieMapViewController.m */; };
 		582A0FE61CF4D48E00BE7493 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 582A0FE51CF4D48E00BE7493 /* MapKit.framework */; };
+		582A0FE91CF4EB9400BE7493 /* Theatre.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A0FE81CF4EB9400BE7493 /* Theatre.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		582A0FE21CF4CEF000BE7493 /* MovieMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieMapViewController.h; sourceTree = "<group>"; };
 		582A0FE31CF4CEF000BE7493 /* MovieMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieMapViewController.m; sourceTree = "<group>"; };
 		582A0FE51CF4D48E00BE7493 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		582A0FE71CF4EB9400BE7493 /* Theatre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theatre.h; sourceTree = "<group>"; };
+		582A0FE81CF4EB9400BE7493 /* Theatre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theatre.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 				582A0FC51CF3872600BE7493 /* Main.storyboard */,
 				582A0FE21CF4CEF000BE7493 /* MovieMapViewController.h */,
 				582A0FE31CF4CEF000BE7493 /* MovieMapViewController.m */,
+				582A0FE71CF4EB9400BE7493 /* Theatre.h */,
+				582A0FE81CF4EB9400BE7493 /* Theatre.m */,
 				582A0FDF1CF3A3C600BE7493 /* MovieDetailViewController.h */,
 				582A0FE01CF3A3C600BE7493 /* MovieDetailViewController.m */,
 				582A0FD91CF3879500BE7493 /* MovieCollectionViewCell.h */,
@@ -182,6 +187,7 @@
 				582A0FCA1CF3872600BE7493 /* Rotten_Mangoes.xcdatamodeld in Sources */,
 				582A0FDB1CF3879500BE7493 /* MovieCollectionViewCell.m in Sources */,
 				582A0FC11CF3872600BE7493 /* AppDelegate.m in Sources */,
+				582A0FE91CF4EB9400BE7493 /* Theatre.m in Sources */,
 				582A0FD81CF3876D00BE7493 /* MoviesInTheatreCollectionViewController.m in Sources */,
 				582A0FBE1CF3872600BE7493 /* main.m in Sources */,
 			);
