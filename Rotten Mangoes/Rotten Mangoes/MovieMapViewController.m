@@ -8,12 +8,16 @@
 
 #import "MovieMapViewController.h"
 #import <MapKit/MapKit.h>
+#import "Movie.h"
 
 @interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocation *lastLocation;
+@property (nonatomic) NSString *postalCode;
+
+@property (nonatomic) NSString *api;
 
 @end
 
@@ -29,6 +33,8 @@
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+    
+    self.api = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?";
 
 }
 
@@ -38,6 +44,7 @@
     
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.locationManager startUpdatingLocation];
+        
     }
 }
 
@@ -58,10 +65,11 @@
         
         [coder reverseGeocodeLocation:currentLocation completionHandler:^
          (NSArray<CLPlacemark *> *placemarks, NSError *error) {
-             for (CLPlacemark *place in placemarks) {
-                 NSLog(@"Placemark: %@", place.postalCode);
-                 
-             }
+             CLPlacemark *place = [placemarks firstObject];
+             
+             self.postalCode = place.postalCode;
+             
+             [self findTheatres];
              
         }];
         
@@ -70,6 +78,24 @@
     
     self.lastLocation = currentLocation;
 
+}
+
+-(void)findTheatres {
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@address=%@&movie=%@", self.api, self.postalCode, [self.movie.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+    
+    NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSError *jsonError = nil;
+        
+        NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        
+        NSLog(@"the data: %@", theData);
+
+        
+    }];
+    [task resume];
 }
 
 

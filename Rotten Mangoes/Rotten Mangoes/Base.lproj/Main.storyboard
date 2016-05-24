@@ -132,7 +132,7 @@
                     <navigationItem key="navigationItem" title="Details" id="mDc-0C-xQ7">
                         <barButtonItem key="rightBarButtonItem" title="Map" id="xel-Qk-1VW">
                             <connections>
-                                <segue destination="Wiz-Lz-2f6" kind="show" id="rDG-DB-S1D"/>
+                                <segue destination="Wiz-Lz-2f6" kind="show" identifier="MapSegue" id="rDG-DB-S1D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

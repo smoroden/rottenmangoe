@@ -8,6 +8,7 @@
 
 #import "MovieDetailViewController.h"
 #import "Movie.h"
+#import "MovieMapViewController.h"
 
 @interface MovieDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
@@ -44,5 +45,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"MapSegue"]) {
+        MovieMapViewController *mmvc = segue.destinationViewController;
+        
+        mmvc.movie = self.movie;
+    }
+}
 
 @end

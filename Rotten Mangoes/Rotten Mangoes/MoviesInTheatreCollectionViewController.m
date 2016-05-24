@@ -127,15 +127,19 @@ static NSString * const reuseIdentifier = @"Cell";
         
         
         cell.task = [[NSURLSession sharedSession] dataTaskWithURL:movie.posterUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            movie.poster = [UIImage imageWithData:data];
             
+            if(data) {
+                movie.poster = [UIImage imageWithData:data];
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.posterImageView.image = movie.poster;
+                    //[self.collectionView reloadData];
+                    
+                });
+            }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                cell.posterImageView.image = movie.poster;
-                //[self.collectionView reloadData];
-                
-            });
         }];
         
         [cell.task resume];

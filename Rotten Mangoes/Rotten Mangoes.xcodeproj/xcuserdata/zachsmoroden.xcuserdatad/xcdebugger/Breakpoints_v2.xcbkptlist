@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Rotten Mangoes/MovieDetailViewController.m"
-            timestampString = "485732317.44656"
+            timestampString = "485809086.119527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "-setupView"
             landmarkType = "5">
          </BreakpointContent>
