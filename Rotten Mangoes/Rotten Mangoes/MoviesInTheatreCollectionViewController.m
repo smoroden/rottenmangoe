@@ -126,7 +126,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if(!movie.poster) {
         
-        //CR: This is a tough one: Cells are mapped to indexPaths, and may that mapping may change without notice. Instead of copying in a cell into the completion block, you need to copy in the indexPath, and ask the collection view (same thing with table views) for the cell that is mapped to a given indexPath. 
+        //CR: This is a tough one: Cells are mapped to indexPaths, and may that mapping may change without notice. Instead of copying in a cell into the completion block, you need to copy in the indexPath, and ask the collection view (same thing with table views) for the cell that is mapped to a given indexPath.
         cell.task = [[NSURLSession sharedSession] dataTaskWithURL:movie.posterUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
             if(data) {
