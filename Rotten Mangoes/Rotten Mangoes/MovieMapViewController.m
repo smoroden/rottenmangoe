@@ -143,15 +143,19 @@
 }
 
 -(void) addAnnotations {
+    NSMutableArray * annotations = [NSMutableArray array];
+    
     for (Theatre *theatre in self.theatres) {
         MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
         newAnnotation.title = theatre.name;
         newAnnotation.subtitle = theatre.address;
         newAnnotation.coordinate = theatre.location;
         
-        [self.mapView addAnnotation:newAnnotation];
-
+        [annotations addObject:newAnnotation];
     }
+    
+    //CR: Consider batch-adding annotations after looping through all theatres: If you have, say, over 100 annotations, and you add them one by one, it's possible that MKMapView could handle them more efficiently if you batch-add annotations.
+    [self.mapView addAnnotations:annotations];
 }
 
 - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
