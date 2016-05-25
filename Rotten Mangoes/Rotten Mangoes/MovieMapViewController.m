@@ -102,6 +102,7 @@ static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
     
 }
 
+//CR: Even better, abstract networking/data code into a 'data source' object: View controllers should not deal with networking/data-acquisition.
 -(void)findTheatres {
     NSURLSession *session = [NSURLSession sharedSession];
     
@@ -112,13 +113,14 @@ static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
         NSError *jsonError = nil;
         
         if (data) {
-            NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-            NSArray *theTheatres = [theData valueForKey:@"theatres"];
+            //CR: No need to prefix variable names with 'the': Convention is to use the noun that refers to the object returned by a method or objects contained in a storage variable. Be clear and succinct, avoid using prefixes/suffixes that do not add value to code readers (code is read more often than written).
+            NSDictionary *JSONData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            NSArray *theatres = [JSONData valueForKey:@"theatres"];
             
             // To make sure that we don't have multiples of the same theatre we put the names into a set
             NSMutableSet *theatreSet = [NSMutableSet set];
             
-            for (NSDictionary *theatre in theTheatres) {
+            for (NSDictionary *theatre in theatres) {
                 Theatre *new = [[Theatre alloc] initWithDictionary:theatre];
                 
                 // Only if the set doesn't contain the name already do we add the new theatre
@@ -129,7 +131,7 @@ static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
                 
             }
             
-            NSLog(@"The theatres: %@", theTheatres);
+            NSLog(@"The theatres: %@", theatres);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
