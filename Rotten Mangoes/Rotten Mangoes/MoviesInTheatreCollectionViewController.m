@@ -49,7 +49,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //test
 
 -(void)refreshMovies {
-    
+    //CR: If you refresh movies 100 times, how many activity indicator views will you end up having?
     UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
     activityView.frame = self.view.frame;
