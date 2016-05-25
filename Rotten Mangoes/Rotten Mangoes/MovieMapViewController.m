@@ -12,7 +12,7 @@
 #import "Theatre.h"
 #import "TheatreCell.h"
 
-#define API_KEY @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?"
+#define SHOWTIME_API_KEY @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?"
 
 @interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -103,7 +103,7 @@
 -(void)findTheatres {
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@address=%@&movie=%@", API_KEY, self.postalCode, [self.movie.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@address=%@&movie=%@", SHOWTIME_API_KEY, self.postalCode, [self.movie.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
     
     NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         

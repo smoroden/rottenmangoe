@@ -11,13 +11,15 @@
 #import "MovieCollectionViewCell.h"
 #import "MovieDetailViewController.h"
 
+#define RT_API_KEY @"&apikey=55gey28y6ygcr8fjy4ty87ek"
+
 @interface MoviesInTheatreCollectionViewController () <UIScrollViewDelegate>
 
 @property (nonatomic) NSMutableArray *movies;
 @property (nonatomic) NSURL *nextUrl;
 @property (nonatomic) BOOL hasMore;
 @property (nonatomic) BOOL isRefreshing;
-@property (nonatomic) NSString *apikey;
+
 
 @end
 
@@ -37,8 +39,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.movies = [NSMutableArray array];
     
     _hasMore = YES;
-    
-    self.apikey = @"&apikey=55gey28y6ygcr8fjy4ty87ek";
+
     
     [self refreshMovies];
     
@@ -60,7 +61,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url;
     if (!self.nextUrl && self.hasMore) {
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?%@&page_limit=50", self.apikey]];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?%@&page_limit=50", RT_API_KEY]];
     } else {
         url = self.nextUrl;
     }
@@ -83,7 +84,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         NSDictionary *links = [theData valueForKey:@"links"];
         
-        self.nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[links valueForKey:@"next"], self.apikey]];
+        self.nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[links valueForKey:@"next"], RT_API_KEY]];
         self.hasMore = self.nextUrl ? YES : NO;
         
                 self.isRefreshing = NO;
