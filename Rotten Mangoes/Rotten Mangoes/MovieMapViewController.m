@@ -14,6 +14,8 @@
 
 #define SHOWTIME_API_KEY @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?"
 
+static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
+
 @interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -168,10 +170,12 @@
     // For example, you may want to instantiate a custom RMTheatreAnnotationView only for RMTheatreAnnotation instances.
     
     if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
-        MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        //CR: Try to use constants for reuse identifiers.
+        MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:kTheatreAnnotationViewReuseIdentifier];
         
         if (!pin) {
-            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                  reuseIdentifier:kTheatreAnnotationViewReuseIdentifier];
             pin.pinTintColor = [UIColor purpleColor];
             pin.canShowCallout = YES;
         }
