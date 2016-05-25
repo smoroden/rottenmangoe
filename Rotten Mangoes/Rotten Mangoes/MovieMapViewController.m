@@ -86,7 +86,7 @@
     self.lastLocation = currentLocation;
 
 }
-- (IBAction)showTheatreList:(UIButton *)sender {
+- (IBAction)toggleTheatreList:(UIButton *)sender {
     
     [UIView animateWithDuration:0.7 animations:^{
         if (self.bottomOfButtonConstraint.constant == 0) {

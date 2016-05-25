@@ -171,7 +171,7 @@
                                     <color key="titleColor" red="0.99990516901016235" green="1" blue="0.99987047910690308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="showTheatreList:" destination="Wiz-Lz-2f6" eventType="touchUpInside" id="wQG-Ja-xML"/>
+                                    <action selector="toggleTheatreList:" destination="Wiz-Lz-2f6" eventType="touchUpInside" id="Mq4-Fy-xXl"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdh-nu-gWG">
