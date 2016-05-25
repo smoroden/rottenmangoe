@@ -88,6 +88,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
                 self.refreshing = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
+            //CR: Instead of prematurely removing activity view from memory, you could do so when iOS sends you a -didReceiveMemoryWarning message.
             [activityView stopAnimating];
             [activityView removeFromSuperview];
 
