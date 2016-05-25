@@ -12,6 +12,8 @@
 #import "Theatre.h"
 #import "TheatreCell.h"
 
+#define API_KEY @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?"
+
 @interface MovieMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -19,7 +21,6 @@
 @property (nonatomic) CLLocation *lastLocation;
 @property (nonatomic) NSString *postalCode;
 
-@property (nonatomic) NSString *api;
 
 @property (nonatomic) NSMutableArray *theatres;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -39,8 +40,6 @@
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    
-    self.api = @"http://lighthouse-movie-showtimes.herokuapp.com/theatres.json?";
     
     self.theatres = [NSMutableArray array];
 
@@ -104,7 +103,7 @@
 -(void)findTheatres {
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@address=%@&movie=%@", self.api, self.postalCode, [self.movie.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@address=%@&movie=%@", API_KEY, self.postalCode, [self.movie.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
     
     NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
