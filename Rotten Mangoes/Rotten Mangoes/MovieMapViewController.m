@@ -164,18 +164,22 @@
         return nil;
     }
     
+    //CR: Ensure you are creating annotation views for annotations that need them. Also, make sure you are creating the correct type of annotation views for a given annotation.
+    // For example, you may want to instantiate a custom RMTheatreAnnotationView only for RMTheatreAnnotation instances.
     
-    MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
-    
-    if (!pin) {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-        pin.pinTintColor = [UIColor purpleColor];
-        pin.canShowCallout = YES;
+    if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+        MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        
+        if (!pin) {
+            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+            pin.pinTintColor = [UIColor purpleColor];
+            pin.canShowCallout = YES;
+        }
+        
+        return pin;
     }
     
-    
-    
-    return pin;
+    return nil;
 }
 
 #pragma mark UITableView methods
