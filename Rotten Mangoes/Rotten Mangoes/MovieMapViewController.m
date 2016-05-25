@@ -197,7 +197,9 @@ static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
     cell.nameLabel.text = theatre.name;
     cell.addressLabel.text = theatre.address;
     
-    CGFloat distance = [self.lastLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:theatre.location.latitude longitude:theatre.location.longitude]]/1000;
+    //CR: Use the correct type, even if it's a 'typealias': Instead of CGFloat, use CLLocationDistance, since -distanceFromLocation's return type is CLLocationDistance.
+    CLLocationDistance distance = [self.lastLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:theatre.location.latitude
+                                                                                                     longitude:theatre.location.longitude]]/1000;
     
     cell.distanceLabel.text = [NSString stringWithFormat:@"%0.1fkm",distance];
     //theatre.location
