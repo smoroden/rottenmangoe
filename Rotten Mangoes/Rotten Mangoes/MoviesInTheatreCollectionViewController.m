@@ -71,6 +71,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         NSError *jsonError = nil;
         
+        // CR: Make sure to check for nil/non-nil parameters when nullability annotations are available. 
         NSDictionary *theData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
         
         NSArray *movies = [theData valueForKey:@"movies"];
