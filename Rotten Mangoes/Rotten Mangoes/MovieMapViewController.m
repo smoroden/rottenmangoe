@@ -123,6 +123,7 @@ static NSString * const kTheatreAnnotationViewReuseIdentifier = @"Pin";
             for (NSDictionary *theatre in theatres) {
                 Theatre *new = [[Theatre alloc] initWithDictionary:theatre];
                 
+                //CR: NSSet uses NSObject's -isEqual: method to determine equality (i.e. if an object should be added to a set): Correct method would be to override Theatre's -isEqual, and return YES if names are equal.
                 // Only if the set doesn't contain the name already do we add the new theatre
                 if(![theatreSet containsObject:new.name]) {
                     [self.theatres addObject:new];
