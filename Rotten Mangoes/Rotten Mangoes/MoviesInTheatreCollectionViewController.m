@@ -18,8 +18,7 @@
 @property (nonatomic) NSMutableArray *movies;
 @property (nonatomic) NSURL *nextUrl;
 @property (nonatomic) BOOL hasMore;
-@property (nonatomic) BOOL isRefreshing;
-
+@property (nonatomic, getter=isRefreshing) BOOL refreshing; //CR: In Objective C, consider using getter annotation for BOOL properties. This is an Objective C/Cocoa convention (it's been dropped from Swift). When setting this property, use self.refreshing, when accessing, use self.isRefreshing.
 
 @end
 
@@ -66,7 +65,7 @@ static NSString * const reuseIdentifier = @"Cell";
         url = self.nextUrl;
     }
     
-    self.isRefreshing = YES;
+    self.refreshing = YES;
     
     NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -87,7 +86,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[links valueForKey:@"next"], RT_API_KEY]];
         self.hasMore = self.nextUrl ? YES : NO;
         
-                self.isRefreshing = NO;
+                self.refreshing = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityView stopAnimating];
             [activityView removeFromSuperview];
@@ -205,7 +204,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height)
     {
-        if (!self.isRefreshing) {
+        if (!self.refreshing) {
             [self refreshMovies];
         }
         
